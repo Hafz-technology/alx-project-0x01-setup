@@ -80,16 +80,4 @@ Static generation (getStaticProps) is used for initial data fetching
 Modals demonstrate interactive UI patterns
 TypeScript interfaces ensure type safety throughout the application
 Tailwind CSS provides utility-first styling
-Project Structure
-alx-project-0x01/
-├── components/
-│   ├── common/          # Reusable components
-│   └── layout/          # Layout components
-├── interfaces/          # TypeScript interfaces
-├── pages/
-│   ├── posts/           # Posts related pages
-│   ├── users/          # Users related pages
-│   └── index.tsx       # Home page
-├── public/              # Static assets
-├── styles/              # Global styles
-└── ...                  # Other Next.js files
+
