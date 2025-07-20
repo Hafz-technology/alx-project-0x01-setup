@@ -2,42 +2,39 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import UserCard from '@/components/common/UserCard'; // Import UserCard
+import { UserProps } from '@/interfaces'; // Import UserProps
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
+interface UsersPageProps {
+  users: UserProps[]; // Define props for the component
 }
 
-const UsersPage: React.FC = () => {
-  // Mock data for users
-  const users: User[] = [
-    { id: 'u1', name: 'Alice Johnson', email: 'alice.j@example.com' },
-    { id: 'u2', name: 'Bob Williams', email: 'bob.w@example.com' },
-    { id: 'u3', name: 'Charlie Brown', email: 'charlie.b@example.com' },
-  ];
-
+const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
       <main className="flex-grow container mx-auto p-4">
         <h1 className="text-4xl font-bold text-gray-900 mb-6 text-center">All Users</h1>
-        <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
-          <ul className="divide-y divide-gray-200">
-            {users.map(user => (
-              <li key={user.id} className="py-4 flex justify-between items-center">
-                <div>
-                  <p className="text-lg font-medium text-gray-900">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.email}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {users.map(user => (
+            <UserCard key={user.id} {...user} /> // Pass all user props to UserCard
+          ))}
         </div>
       </main>
       <Footer />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  const users = await response.json() // Renamed 'posts' to 'users' for clarity
+
+  return {
+    props: {
+      users // Pass 'users' as props
+    }
+  }
+}
 
 export default UsersPage;
