@@ -38,3 +38,8 @@ export async function getStaticProps() {
 }
 
 export default UsersPage;
+// export default Users;
+
+
+
+// posts.map
